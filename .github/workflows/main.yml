@@ -3,6 +3,16 @@ on:
   pull_request:
     types: [opened, edited]
   workflow_dispatch:
+  push:
+    branches:
+      - main # main
+      - "dev-*" # dev-new dev-this-feat
+      - "feat/**" # feat/new feat/new/button ** permette di verificare più slash
+    paths-ignore:
+      - ".github/workflows/*" # utilizzando paths-ignore stiamo specificando che se si fa un push su uno dei branch nella lista e si modifica un file che sta nella cartella workflows di .github la pipeline NON partirà
+    # paths:
+    #   - ".github/workflows/*" # utilizzando paths invece stiamo specificando che se si fa un push su uno dei branch nella lista per far partire il workflow bisogna aver modificato almeno un file al percorso .github/workflows
+
 jobs:
   lint:
     runs-on: ubuntu-latest
